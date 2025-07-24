@@ -1,4 +1,4 @@
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3y5Jnes21FHag3GZc0twsXci865U26OYdP6fAL0Lel linfordc05@gmail.com
 
 
-yea
+I made a change to a needed text.
