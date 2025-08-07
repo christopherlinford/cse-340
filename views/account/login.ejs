@@ -1,31 +1,48 @@
 <h1><%- title %></h1>
 <%- messages() %>
+
 <% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
-<form class="input-box" id="loginForm" action="/account/login" method="post">
-    <label>Email<input type="email" name="account_email" required autocomplete="email" value="<%= locals.account_email %>"></label>
-    <label>Password<input type="password" name="account_password" id="password" required autocomplete="current-password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$"><span class="reveal-button active" id="passwordHide">hide password</span></label>
-    <input type="submit" value="LOGIN">
-</form>
-<div>
-    <span>No account? <a href="/account/registration">Sign up</a></span>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="login-box">
+  <form class="input-box" id="loginForm" action="/account/login" method="post">
+    <label for="account_email">Email Address:</label>
+    <input type="email" id="account_email" name="account_email" required autocomplete="email" value="<%= locals.account_email %>">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="account_password" required autocomplete="current-password" 
+      pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$">
+    
+    <p class="password-note">
+      Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.
+    </p>
+
+    <span class="show-password-btn" id="passwordHide">Show Password</span>
+    
+    <input type="submit" value="Login" class="login-btn">
+  </form>
+
+  <div class="signup-link">
+    No account? <a href="/account/register">Sign-up</a>
+  </div>
 </div>
+
 <script>
-    const passwordInput = document.querySelector("#password");
-    const passwordHide = document.querySelector("#passwordHide");
-    passwordHide.addEventListener("click", () => {
-        if(passwordInput.getAttribute("type") == "password" ) {
-            passwordInput.setAttribute("type", "text");
-            passwordHide.classList.remove("active");
-        }
-        else {
-            passwordInput.setAttribute("type", "password");
-            passwordHide.classList.add("active");
-        }
-    })
+  const passwordInput = document.querySelector("#password");
+  const passwordHide = document.querySelector("#passwordHide");
+  
+  passwordHide.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      passwordHide.textContent = "Hide Password";
+    } else {
+      passwordInput.type = "password";
+      passwordHide.textContent = "Show Password";
+    }
+  });
 </script>
